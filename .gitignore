@@ -15,6 +15,7 @@
 /src/assets/images
 /src/assets/js
 /src/assets/plugins
+/src/assets/scss
 
 # profiling files
 chrome-profiler-events*.json
