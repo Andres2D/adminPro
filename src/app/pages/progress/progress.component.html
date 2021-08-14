@@ -5,11 +5,22 @@
 
                 <h4 class="card-title">Striped Progress bar</h4>
                 <div class="progress m-t-20">
+                    <div class="progress-bar bg-primary progress-bar-striped active" 
+                         style="height:10px;"
+                         [style.width]="getProgress1"
+                         role="progressbar"> 
+                         <span class="sr-only">
+                            85% Complete (success)
+                        </span> 
+                    </div>
+                </div>
+
+                <div class="progress m-t-20">
                     <div class="progress-bar bg-info progress-bar-striped active" 
                          style="height:10px;"
-                         [style.width]="getPercentage"
+                         [style.width]="getProgress2"
                          role="progressbar"> 
-                        <span class="sr-only">
+                         <span class="sr-only">
                             85% Complete (success)
                         </span> 
                     </div>
@@ -24,37 +35,19 @@
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" 
-                                type="button"
-                                (click)="ChangeValue(-5)">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </span>
-                    <input type="number" 
-                           class="form-control" 
-                           placeholder="Progress"
-                           min="0"
-                           max="100"
-                           [(ngModel)]="progress">
-
-
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary"
-                                type="button"
-                                (click)="ChangeValue(5)">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </span>
-                </div>
+                <app-increaser (value)="progress1 = $event" 
+                                [value]="progress1">
+                </app-increaser>
             </div>
         </div>
     </div>
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                2
+                <app-increaser (value)="progress2 = $event" 
+                                [value]="progress2"
+                                [btnClass]="'btn-info'">
+                </app-increaser>
             </div>
         </div>
     </div>

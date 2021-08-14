@@ -9,6 +9,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { Graph1Component } from './graph1/graph1.component';
 import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SharedModule } from '../shared/shared.module';
     //PagesRoutingModule,
     SharedModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ComponentsModule
   ],
   exports: [
     DashboardComponent,
