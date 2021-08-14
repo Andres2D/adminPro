@@ -9,15 +9,10 @@ import { MultiDataSet, Label, Color } from 'ng2-charts';
 })
 export class Graph1Component {
 
-  public doughnutChartLabels: Label[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public doughnutChartData: MultiDataSet = [
+  public labels1: Label[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+  public data1: MultiDataSet = [
     [350, 450, 100]
   ];
-
-  public colors: Color[] = [
-    {
-      backgroundColor: ['#6857E6','#009FEE','#F02059']
-    }
-  ]
+  public title: string = 'Sales';
 
 }

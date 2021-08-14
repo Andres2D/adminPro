@@ -27,8 +27,7 @@ import { ComponentsModule } from '../components/components.module';
     SharedModule,
     RouterModule,
     FormsModule,
-    ComponentsModule,
-    ChartsModule
+    ComponentsModule
   ],
   exports: [
     DashboardComponent,
