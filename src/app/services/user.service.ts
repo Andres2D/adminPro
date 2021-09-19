@@ -1,18 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterUser } from '../interfaces/register-form.interface';
-
+declare const gapi: any;
 const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  public auth2: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private ngZone: NgZone, private router: Router) { 
+    this.googleInit();
+  }
+
+  googleInit() {
+    gapi.load('auth2', () => {
+      this.auth2 = gapi.auth2.init({
+        client_id: environment.google_id,
+        cookiepolicy: 'single_host_origin'
+      });
+    });
+  }
 
   createUser(formData: RegisterUser) {
     return this.http.post(`${ base_url }/users`, formData).
@@ -58,6 +71,15 @@ export class UserService {
     );
   }
 
+  logout(){
+    this.removeToken();
+    this.auth2.signOut().then(() => {
+      this.ngZone.run(() => {
+        this.router.navigateByUrl('/login');
+      })
+    });
+  }
+
   saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
@@ -77,5 +99,9 @@ export class UserService {
   removeEmail(): void {
     localStorage.removeItem('email');
   }
+
+  removeToken(): void {
+    localStorage.removeItem('token');
+  } 
 
 }
