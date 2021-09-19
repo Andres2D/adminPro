@@ -5,12 +5,14 @@ import { ProgressComponent } from './progress/progress.component';
 import { Graph1Component } from './graph1/graph1.component';
 import { PagesComponent } from './pages.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 const routes: Routes = [
   {
     path: 'dashboard',
     component: PagesComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

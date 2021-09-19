@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 declare var Swal;
 @Component({
@@ -23,7 +24,7 @@ export class RegisterComponent {
     }
   );
 
-  constructor(private fb: FormBuilder, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
   createUser(): void {
     this.formSummited = true;
@@ -35,8 +36,7 @@ export class RegisterComponent {
     this.userService.createUser(this.registerForm.value)
       .subscribe({
         next: (resp) => {
-          console.log('user created'),
-          console.log(resp)
+          this.router.navigateByUrl('/');
         },
         error: (err) => {
           console.log(err),

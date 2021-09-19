@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterUser } from '../interfaces/register-form.interface';
@@ -41,8 +41,29 @@ export class UserService {
     );
   }
 
+  validateToken(): Observable<boolean> {
+    const token = this.getToken() || '';
+
+    return this.http.get(`${base_url}/login/renew`, {
+      headers: {
+        'x-token': token
+      }
+    })
+    .pipe(
+      tap((res: any) => {
+        this.saveToken(res.token);
+      }),
+      map( res => true),
+      catchError( err => of(false))
+    );
+  }
+
   saveToken(token: string): void {
     localStorage.setItem('token', token);
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token');
   }
 
   setEmail(email: string): void {
