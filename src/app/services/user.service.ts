@@ -19,12 +19,15 @@ export class UserService {
   }
 
   googleInit() {
-    gapi.load('auth2', () => {
-      this.auth2 = gapi.auth2.init({
-        client_id: environment.google_id,
-        cookiepolicy: 'single_host_origin'
+    return new Promise<void>(resolve => {
+      gapi.load('auth2', () => {
+        this.auth2 = gapi.auth2.init({
+          client_id: environment.google_id,
+          cookiepolicy: 'single_host_origin'
+        });
+        resolve();
       });
-    });
+    })
   }
 
   createUser(formData: RegisterUser) {
