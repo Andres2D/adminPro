@@ -2,7 +2,6 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { environment } from 'src/environments/environment';
 declare const Swal;
 declare const gapi;
 @Component({

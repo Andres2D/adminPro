@@ -33,11 +33,14 @@
             <div class="card-body">
                 <h4 class="card-title">My profile</h4>
                 <h6 class="card-subtitle">settings</h6>
-                <img src="" alt="" srcset="">
-                <input type="file" name="" id="">
+                <div class="text-center">
+                    <img *ngIf="!imgTemp" [src]="user.imageUrl" class="img-avatar">
+                    <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar">
+                </div>
+                <input (change)="changeImage($event.target.files[0])" type="file" name="" id="">
                 <br>
                 <br>
-                <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+                <button [disabled]="!imageUpload" (click)="uploadImage()" type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10">
                     <i class="fa fa-save"></i>
                     Change image
                 </button>
