@@ -6,6 +6,7 @@ import { Graph1Component } from './graph1/graph1.component';
 import { PagesComponent } from './pages.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'account-settings',
         component: AccountSettingsComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       }
     ]
   }

@@ -5,6 +5,7 @@ import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterUser } from '../interfaces/register-form.interface';
+import { User } from '../models/user.model';
 declare const gapi: any;
 const base_url = environment.base_url;
 
@@ -13,9 +14,14 @@ const base_url = environment.base_url;
 })
 export class UserService {
   public auth2: any;
+  public user: User;
 
   constructor(private http: HttpClient, private ngZone: NgZone, private router: Router) { 
     this.googleInit();
+  }
+
+  get _id(): string {
+    return this.user._id || '';
   }
 
   googleInit() {
@@ -66,12 +72,28 @@ export class UserService {
       }
     })
     .pipe(
-      tap((res: any) => {
+      map((res: any) => {
+        const { email, google, name, role, _id, img = ''} = res.user;
+        this.user = new User(name, email, '', google, role, _id, img);
         this.saveToken(res.token);
+        return true;
       }),
-      map( res => true),
       catchError( err => of(false))
     );
+  }
+
+  updateProfile(data: { email: string, name: string, role: string }) {
+
+    data = {
+      ...data,
+      role: this.user.role
+    }
+
+    return this.http.put(`${base_url}/users/${this._id}`, data,{
+      headers: {
+        'x-token': this.getToken()
+      }
+    });
   }
 
   logout(){
