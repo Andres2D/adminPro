@@ -15,6 +15,7 @@ import { ComponentsModule } from '../components/components.module';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { IncreaserComponent } from '../components/increaser/increaser.component';
+import { UsersComponent } from './maintenance/users/users.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { IncreaserComponent } from '../components/increaser/increaser.component'
     Graph1Component,
     PagesComponent,
     AccountSettingsComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,

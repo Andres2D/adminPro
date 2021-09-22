@@ -23,6 +23,24 @@ export class SidebarService {
           url: 'graph1'
         }
       ]
+    },
+    {
+      title: 'Maintenance',
+      icon: 'mdi mdi-folder-lock-open',
+      subMenu: [
+        {
+          title: 'Users',
+          url: 'users'
+        },
+        {
+          title: 'Hospitals',
+          url: 'hospitals'
+        },
+        {
+          title: 'Doctors',
+          url: 'doctors'
+        }
+      ]
     }
   ];
 

@@ -7,7 +7,7 @@ import { PagesComponent } from './pages.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
-
+import { UsersComponent } from './maintenance/users/users.component';
 
 const routes: Routes = [
   {
@@ -34,6 +34,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
       }
     ]
   }
