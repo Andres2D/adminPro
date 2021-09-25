@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { debounceTime, distinctUntilChanged, fromEvent, Observable, Subject, takeUntil } from 'rxjs';
+import { debounceTime, delay, distinctUntilChanged, fromEvent, Observable, Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { SearchsService } from 'src/app/services/searchs.service';
@@ -42,6 +42,15 @@ export class UsersComponent implements OnInit, OnDestroy {
     .subscribe(() => {
       this.search(this.searchInput.nativeElement.value);
     }); 
+
+    this.modalService.newImage
+    .pipe(
+      takeUntil(this.ngUnsubscribe),
+      delay(100)
+    )
+    .subscribe( () => {
+      this.loadUsers();
+    })
   }
   
   loadUsers() : void {
@@ -130,6 +139,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   showModal(user: User): void {
-    this.modalService.openModal();
+    this.modalService.showModal(true, 'users', user._id, user.img);
   }
 }
