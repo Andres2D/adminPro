@@ -1,4 +1,4 @@
-<div class="row animated fadeIn dats">
+<div class="row animated fadeIn fast">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -6,6 +6,7 @@
                 <input type="text"
                        class="form-control"
                        placeholder="Search User"
+                       #searchInput
                 />
                 
             </div>
@@ -13,7 +14,7 @@
     </div>
 </div>
 
-<div class="row animated fadeIn dats">
+<div *ngIf="loading" class="row animated fadeIn fast">
     <div class="col-12">
         <div class="alert alert-info text-center">
             <h4 class="alert-heading">Loading</h4>
@@ -23,38 +24,52 @@
     </div>
 </div>
 
-<div class="row animated fadeIn dats">
+<div *ngIf="!loading" class="row animated fadeIn fast">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Users</h4>
+                <h4 class="card-title">Users ({{totalUsers}})</h4>
                 <h6 class="card-subtitle">Users registered on App</h6>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Avatar</th>
+                                <th class="w100">Avatar</th>
                                 <th>Email</th>
                                 <th>Name</th>
-                                <th>Role</th>
+                                <th class="w140">Role</th>
                                 <th>Auth</th>
-                                <th class="text-nowrap">Action</th>
+                                <th class="text-nowrap w100">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tantas earum numeris</td>
-                                <td>Tantas earum numeris</td>
-                                <td>Tantas earum numeris</td>
-                                <td>Tantas earum numeris</td>
-                                <td>Tantas earum numeris</td>
-                                <td class="text-nowrap">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                            <tr *ngFor="let user of users">
+                                <td class="text-center">
+                                    <img class="avatar cursor" (click)="showModal(user)" [src]="user.imageUrl" alt="User image">
+                                </td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.name}}</td>
+                                <td>
+                                    <select [(ngModel)]="user.role" (change)="changeRole(user)">
+                                        <option value="ADMIN_ROLE">Admin</option>
+                                        <option value="USER_ROLE">User</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <span *ngIf="user.google" class="label label-danger">Google</span>
+                                    <span *ngIf="!user.google" class="label label-info">Email</span>
+                                </td>
+                                <td class="text-nowrap text-center">
+                                    <a *ngIf="user._id !== userId" data-toggle="tooltip" class="cursor" (click)="deleteUser(user)" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div *ngIf="searchInput.length === 0">
+                    <button (click)="changePage(-5)" class="btn btn-secondary">Previous</button>
+                    &nbsp;
+                    <button (click)="changePage(5)" class="btn btn-secondary">Next</button>
                 </div>
             </div>
         </div>
