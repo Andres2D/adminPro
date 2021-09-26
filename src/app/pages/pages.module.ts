@@ -16,6 +16,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { ProfileComponent } from './profile/profile.component';
 import { IncreaserComponent } from '../components/increaser/increaser.component';
 import { UsersComponent } from './maintenance/users/users.component';
+import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
+import { DoctorsComponent } from './maintenance/doctors/doctors.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -26,7 +29,9 @@ import { UsersComponent } from './maintenance/users/users.component';
     PagesComponent,
     AccountSettingsComponent,
     ProfileComponent,
-    UsersComponent
+    UsersComponent,
+    HospitalsComponent,
+    DoctorsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +40,8 @@ import { UsersComponent } from './maintenance/users/users.component';
     RouterModule,
     FormsModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ],
   exports: [
     DashboardComponent,

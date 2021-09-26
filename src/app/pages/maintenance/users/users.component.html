@@ -14,15 +14,7 @@
     </div>
 </div>
 
-<div *ngIf="loading" class="row animated fadeIn fast">
-    <div class="col-12">
-        <div class="alert alert-info text-center">
-            <h4 class="alert-heading">Loading</h4>
-            <i class="fa fa-spin fa-refresh fa-2x"></i>
-            <p class="mb-0">Please wait</p>
-        </div>
-    </div>
-</div>
+<app-loader *ngIf="loading"></app-loader>
 
 <div *ngIf="!loading" class="row animated fadeIn fast">
     <div class="col-12">
@@ -66,7 +58,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div *ngIf="searchInput.length === 0">
+                <div *ngIf="searchInput.value.length === 0">
                     <button (click)="changePage(-5)" class="btn btn-secondary">Previous</button>
                     &nbsp;
                     <button (click)="changePage(5)" class="btn btn-secondary">Next</button>

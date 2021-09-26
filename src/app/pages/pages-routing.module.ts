@@ -8,6 +8,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { AuthGuard } from '../guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './maintenance/users/users.component';
+import { HospitalsComponent } from './maintenance/hospitals/hospitals.component';
 
 const routes: Routes = [
   {
@@ -17,27 +18,52 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DashboardComponent
+        component: DashboardComponent,
+        data: {
+          title: 'Dashboard'
+        }
       },
       {
         path: 'progress',
-        component: ProgressComponent
+        component: ProgressComponent,
+        data: {
+          title: 'Progress'
+        }
       },
       {
         path: 'graph1',
-        component: Graph1Component
+        component: Graph1Component,
+        data: {
+          title: 'Graph'
+        }
       },
       {
         path: 'account-settings',
-        component: AccountSettingsComponent
+        component: AccountSettingsComponent,
+        data: {
+          title: 'Settings'
+        }
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        data: {
+          title: 'Profile'
+        }
       },
       {
         path: 'users',
-        component: UsersComponent
+        component: UsersComponent,
+        data: {
+          title: 'Users'
+        }
+      },
+      {
+        path: 'hospitals',
+        component: HospitalsComponent,
+        data: {
+          title: 'Hospitals'
+        }
       }
     ]
   }

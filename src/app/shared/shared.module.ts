@@ -4,19 +4,20 @@ import { BreadcrumsComponent } from './breadcrums/breadcrums.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
-
-
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     BreadcrumsComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoaderComponent
   ],
   exports: [
     BreadcrumsComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,

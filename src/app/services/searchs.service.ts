@@ -38,6 +38,8 @@ export class SearchsService {
            case 'users':
              return this.transformUsers(resp.results);
              break;
+          case 'hospitals':
+            return resp.results;
              default:
                break;
               }
