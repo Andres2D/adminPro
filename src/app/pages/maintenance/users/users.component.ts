@@ -56,9 +56,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   loadUsers() : void {
     this.loading = true;
     this.userService.loadUsers(this.from)
-    .pipe(
-      takeUntil(this.ngUnsubscribe)
-    )
     .subscribe( ({total, users}) => {
       this.totalUsers = total;
       this.usersTemp = users;
@@ -85,9 +82,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
       
     this.searchService.search('users', term)
-    .pipe(
-      takeUntil(this.ngUnsubscribe)
-    )
     .subscribe( res => {
       this.users = res;
     });
