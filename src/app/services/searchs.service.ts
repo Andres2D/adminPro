@@ -40,6 +40,9 @@ export class SearchsService {
              break;
           case 'hospitals':
             return resp.results;
+            break;
+          case 'doctors':
+            return resp.results;
              default:
                break;
               }

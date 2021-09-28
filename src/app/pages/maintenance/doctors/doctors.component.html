@@ -1,1 +1,76 @@
-<p>doctors works!</p>
+<div class="row animated fadeIn dats">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+                <input type="text"
+                       class="form-control"
+                       placeholder="Search User"
+                       #searchDr
+                />
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loading" class="row animated fadeIn dats">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Loading</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Please wait</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!loading"  class="row animated fadeIn dats">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Doctors ({{doctors.length}})</h4>
+                        <h6 class="card-subtitle">Doctors registered on App</h6>
+                    </div>
+                    <div class="col">
+                        <div class="text-right">
+                            <a class="btn btn-primary" routerLink="/dashboard/doctor/new">
+                                <i class="fa fa-stethoscope"></i>
+                                Create doctor
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="w100">Photo</th>
+                                <th>Name</th>
+                                <th class="text-nowrap">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let doctor of doctors">
+                                <td class="text-center" (click)="showModal(doctor)">
+                                    <img [src]="doctor.img | image:'doctors'"
+                                    class="w100 cursor" alt="doctor.name">
+                                </td>
+                                <td>{{doctor.name}}</td>
+                                <td class="text-nowrap w100 text-center">
+                                    <a [routerLink]="['/dashboard/doctor', doctor._id]" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a class="cursor" (click)="deleteDoctor(doctor)" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <button class="btn btn-secondary">Next</button>
+                &nbsp;
+                <button class="btn btn-secondary">Previous</button> -->
+            </div>
+        </div>
+    </div>
+</div>
