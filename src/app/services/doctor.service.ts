@@ -33,6 +33,24 @@ export class DoctorService {
       );
   }
 
+  loadDoctor(id: string): Observable<Doctor> {
+    const url = `${base_url}/doctors/${id}`;
+    return this.http.get(url, this.headers)
+    .pipe(
+      map( (res: {ok: boolean, doctor: Doctor}) => res.doctor )
+      );
+  }
+
+  createDoctor(doctor: {name: string, hospital: string}): Observable<any> {
+    const url = `${base_url}/doctors`;
+    return this.http.post(url, doctor, this.headers);
+  }
+
+  updateDoctor(doctor: Doctor): Observable<any> {
+    const url = `${base_url}/doctors/${doctor._id}`;
+    return this.http.put(url, doctor, this.headers);
+  }
+
   deleteDoctor(_id: string): Observable<any> {
     const url = `${base_url}/doctors/${_id}`;
     return this.http.delete(url, this.headers);
