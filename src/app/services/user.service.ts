@@ -33,6 +33,10 @@ export class UserService {
     }
   }
 
+  get role(): string {
+    return this.user.role;
+  }
+
   googleInit() {
     return new Promise<void>(resolve => {
       gapi.load('auth2', () => {

@@ -35,17 +35,19 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(): void {
-    this.userService.updateProfile(this.profileForm.value)
+    this.userService.updateProfile(this.profileForm.getRawValue())
       .subscribe({
         next: () => {
           // TODO: add sweet alert saving success
-          const { name, email } = this.profileForm.value;
+          const { name, email } = this.profileForm.getRawValue();
           this.user.name = name;
           this.user.email = email;
 
           Swal.fire('Saved', 'Changes saved successfull', 'success');
         },
         error: (err) => {
+          console.log(err);
+          
           Swal.fire('Error', err.error.msg, 'error');
         }
       })

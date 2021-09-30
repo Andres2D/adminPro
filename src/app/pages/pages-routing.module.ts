@@ -13,6 +13,7 @@ import { DoctorsComponent } from './maintenance/doctors/doctors.component';
 import { DoctorComponent } from './maintenance/doctors/doctor.component';
 import { SearchsService } from '../services/searchs.service';
 import { SearchsComponent } from './searchs/searchs.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -60,7 +61,8 @@ const routes: Routes = [
         component: UsersComponent,
         data: {
           title: 'Users'
-        }
+        },
+        canActivate: [AdminGuard]
       },
       {
         path: 'hospitals',
