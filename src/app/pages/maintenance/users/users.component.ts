@@ -123,7 +123,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       takeUntil(this.ngUnsubscribe)
     )
     .subscribe( res => {
-      console.log(res);
     })
   }
 

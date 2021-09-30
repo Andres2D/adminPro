@@ -25,7 +25,6 @@ export class HospitalsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadHospitals();
-    console.log(this.searchHospital);
     
     this.searchSubs$ = fromEvent(this.searchHospital.nativeElement, 'keyup')
       .pipe(

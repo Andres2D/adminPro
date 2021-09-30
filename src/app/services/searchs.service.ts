@@ -29,6 +29,11 @@ export class SearchsService {
     return results.map( user => new User(user.name, user.email, '', user.google, user.role, user._id, user.img));
   }
 
+  globalSearch(term: string): Observable<any> {
+    const url = `${base_url}/all/${term}`;
+    return this.http.get(url, this.headers);
+  }
+
   search(type: 'users' | 'doctors' | 'hospitals', term: string): Observable<any> {
     const url = `${base_url}/all/collection/${type}/${term}`;
     return this.http.get(url, this.headers)

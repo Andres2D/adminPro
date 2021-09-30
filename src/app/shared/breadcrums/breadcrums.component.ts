@@ -19,8 +19,6 @@ export class BreadcrumsComponent implements OnDestroy {
                             takeUntil(this.unSubscriber)
                           )
                           .subscribe( ({title}) => {
-                            console.log(title);
-                            
                             this.title = title;
                             document.title = `AdminPro - ${title}`;
                           })

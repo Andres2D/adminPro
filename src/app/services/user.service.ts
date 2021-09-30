@@ -50,6 +50,7 @@ export class UserService {
       pipe(
         tap((res: any) => {
           this.saveToken(res.token);
+          this.setMenu(res.menu);
         })
       );
   }
@@ -59,6 +60,7 @@ export class UserService {
     .pipe(
       tap((res: any) => {
         this.saveToken(res.token);
+        this.setMenu(res.menu);
       })
     );
   }
@@ -68,6 +70,7 @@ export class UserService {
     .pipe(
       tap((res: any) => {
         this.saveToken(res.token);
+        this.setMenu(res.menu);
       })
     );
   }
@@ -85,6 +88,7 @@ export class UserService {
         const { email, google, name, role, _id, img = ''} = res.user;
         this.user = new User(name, email, '', google, role, _id, img);
         this.saveToken(res.token);
+        this.setMenu(res.menu);
         return true;
       }),
       catchError( err => of(false))
@@ -102,6 +106,7 @@ export class UserService {
   }
 
   logout(){
+
     this.removeToken();
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
@@ -112,6 +117,10 @@ export class UserService {
 
   saveToken(token: string): void {
     localStorage.setItem('token', token);
+  }
+
+  setMenu(menu: any): void {
+    localStorage.setItem('menu', JSON.stringify(menu));
   }
 
   getToken(): string {
@@ -132,6 +141,10 @@ export class UserService {
 
   removeToken(): void {
     localStorage.removeItem('token');
+  } 
+
+  removeMenu(): void {
+    localStorage.removeItem('menu');
   } 
 
   loadUsers(from: number = 0): Observable<LoadUser> {

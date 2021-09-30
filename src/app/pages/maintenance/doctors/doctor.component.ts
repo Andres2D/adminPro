@@ -51,13 +51,15 @@ export class DoctorComponent implements OnInit {
     .pipe(
       delay(100)
     )
-      .subscribe( doctor => {
-
-        const {name, hospital: {_id}} = doctor;
-        this.selectedDoctor = doctor;
-        this.doctorForm.setValue({name, hospital: _id});
-      }, error => {
-        this.router.navigateByUrl(`/dashboard/doctors`);
+      .subscribe({
+        next: (doctor) => {
+          const {name, hospital: {_id}} = doctor;
+          this.selectedDoctor = doctor;
+          this.doctorForm.setValue({name, hospital: _id});
+        },
+        error: () => {
+            this.router.navigateByUrl(`/dashboard/doctors`);
+        }
       });
   }
 
